@@ -77,7 +77,7 @@ class APITodoController extends AbstractController {
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+        return new JsonResponse(["message" => "ok"], 200, ['Access-Control-Allow-Origin' => '*']);
 
     }
 
@@ -88,7 +88,7 @@ class APITodoController extends AbstractController {
         $entityManager->remove($task);
         $entityManager->flush();
 
-        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+        return new JsonResponse(["message" => "ok"], 200, ['Access-Control-Allow-Origin' => '*']);
 
     }
 
