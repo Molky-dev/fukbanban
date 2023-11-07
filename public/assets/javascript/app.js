@@ -13,7 +13,7 @@ let tasks = []
 
 
 async function fillTasks() {
-    const listTasks = await fetch('http://localhost:8000/api/v1/tasks')
+    const listTasks = await fetch('http://127.0.0.1:8000/api/v1/tasks')
         .then(response => response.json())
     .then(data => data)
     .catch(error => console.log(error));
@@ -46,7 +46,7 @@ function clearTasks() {
 
 projectSelect.addEventListener('change', async function () {
     const projectId = projectSelect.value
-    const listTasks = await fetch(`http://localhost:8000/api/v1/tasks/${projectId}`)
+    const listTasks = await fetch(`http://127.0.0.1:8000/api/v1/tasks/${projectId}`)
         .then(response => response.json())
         .then(data => data)
         .catch(error => console.log(error));
@@ -177,12 +177,12 @@ function dragDrop() {
 }
 
 async function updateTaskStatus(taskId, taskStatus) {
-    await fetch(`http://localhost:8000/api/v1/tasks/${taskId}/status/${taskStatus}`);
+    await fetch(`http://127.0.0.1:8000/api/v1/tasks/${taskId}/status/${taskStatus}`);
     console.log(taskStatus)
 }
 
 async function deleteTaskById(taskId) {
-    await fetch(`http://localhost:8000/api/v1/tasks/delete/${taskId}`);
+    await fetch(`http://127.0.0.1:8000/api/v1/tasks/delete/${taskId}`);
 }
 
 function deleteTask() {

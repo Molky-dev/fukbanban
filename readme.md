@@ -15,7 +15,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 1. Clonez ce dépôt sur votre machine :
 
    ```bash
-   git clone <URL_DU_REPO>
+   git clone https://github.com/Molky-dev/fukbanban
    ```
 
 2. Lancer le serveur :
@@ -43,4 +43,8 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
    ```
    
 6. Ouvrez votre navigateur et rendez-vous à l'adresse `localhost:8000` (ou autre, selon la configuration de votre machine).
+
+    ```bash
+    symfony open:local
+    ```
 
