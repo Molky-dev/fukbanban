@@ -42,7 +42,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
     php bin/console doctrine:fixtures:load
    ```
    
-6. Ouvrez votre navigateur et rendez-vous à l'adresse `localhost:8000` (ou autre, selon la configuration de votre machine).
+6. Ouvrez votre navigateur.
 
     ```bash
     symfony open:local

@@ -11,12 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-header('Access-Control-Allow-Origin: *');
-
 
 #[Route("/api/v1/")]
 class APITodoController extends AbstractController {
-
     #[Route("tasks")]
     public function tasks(TaskRepository $taskRepository): JsonResponse {
         $tasks = $taskRepository->findAll();
@@ -41,7 +38,8 @@ class APITodoController extends AbstractController {
             ];
         }
 
-        return $this->json($data, );
+        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+
     }
 
     #[Route("tasks/{id}")]
@@ -68,7 +66,8 @@ class APITodoController extends AbstractController {
 
             ];
         }
-        return $this->json($data);
+        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+
     }
 
     #[Route("tasks/{taskId}/status/{taskStatus}")]
@@ -78,7 +77,8 @@ class APITodoController extends AbstractController {
         $entityManager->persist($task);
         $entityManager->flush();
 
-        return $this->json(["status" => "success"]);
+        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+
     }
 
     #[Route("tasks/delete/{taskId}")]
@@ -88,7 +88,8 @@ class APITodoController extends AbstractController {
         $entityManager->remove($task);
         $entityManager->flush();
 
-        return $this->json(["status" => "success"]);
+        return new JsonResponse($data, 200, ['Access-Control-Allow-Origin' => '*']);
+
     }
 
 }
