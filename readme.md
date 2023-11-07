@@ -17,32 +17,36 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
    ```bash
    git clone https://github.com/Molky-dev/fukbanban
    ```
+2. Installez les dépendances :
 
-2. Lancer le serveur :
+   ```bash
+   composer install
+   ```
+
+3. Lancer le serveur :
 
    ```bash
    symfony server:start
    ```
    
-3. Créer la base de données :
+4. Créer la base de données :
 
    ```bash
    php bin/console make:migration 
     ```
    
-4. Créer les tables :
+5. Créer les tables :
 
     ```bash
      php bin/console doctrine:migrations:migrate
      ```
    
-5. Charger les données de test :
+6. Charger les données de test :
 
     ```bash
     php bin/console doctrine:fixtures:load
    ```
-   
-6. Ouvrez votre navigateur.
+7. Ouvrez votre navigateur.
 
     ```bash
     symfony open:local
