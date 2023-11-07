@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+header('Access-Control-Allow-Origin: *');
+
+
 #[Route("/api/v1/")]
 class APITodoController extends AbstractController {
 
@@ -37,7 +40,8 @@ class APITodoController extends AbstractController {
 
             ];
         }
-        return $this->json($data);
+
+        return $this->json($data, );
     }
 
     #[Route("tasks/{id}")]
