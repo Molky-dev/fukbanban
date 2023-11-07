@@ -45,7 +45,7 @@ class TaskVoter extends Voter
                         return true;
                     }
                 }
-                return in_array('ROLE_ADMIN', $user->getRoles());
+                return in_array('ROLE_ADMIN', $token->getUser()->getRoles());
         }
 
         return false;
