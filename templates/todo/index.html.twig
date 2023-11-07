@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuKanBan</title>
+    <link rel="stylesheet" href="{{ asset("assets/stylesheets/style.css") }}" />
+</head>
+<body>
+<header>
+    <div class="info-container">
+        <h1>⟁ FuKanBan</h1>
+        <p>Project : <select id="project-select">
+                <option></option>
+                {% for project in projects %}
+                    <option value="{{ project.getId() }}">{{ project.getName() }}</option>
+                {% endfor %}
+            </select></p>
+    </div>
+</header>
+
+<section class="column-container">
+    {% for status in statues %}
+
+        {% if status == "In Progress" %}
+        <div class="task-column" id="in-progress">
+            <h3>✔ {{ status.getType() }}</h3>
+            <hr class="custom-hr" />
+            <div class="task-list" status-id="{{ status.getId() }}"></div>
+        </div>
+        {% else %}
+            <div class="task-column"  id="{{ status|lower }}">
+                <h3>✔ {{ status.getType() }}</h3>
+                <hr class="custom-hr" />
+                <div class="task-list" status-id="{{ status.getId() }}"></div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+</section>
+
+<div class="error-container"></div>
+
+<script src="{{ asset("assets/javascript/app.js") }}"></script>
+</body>
+</html>

@@ -2,21 +2,23 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Task;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class TaskVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    public const EDIT = 'TASK_EDIT';
+    public const VIEW = 'TASK_VIEW';
+    public const DELETE = 'TASK_DELETE';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Task;
+        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE])
+            && $subject instanceof Task;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -37,6 +39,13 @@ class TaskVoter extends Voter
                 // logic to determine if the user can VIEW
                 // return true or false
                 break;
+            case self::DELETE:
+                foreach($subject->getUsers() as $user) {
+                    if($user->getId() === $token->getUser()->getId()) {
+                        return true;
+                    }
+                }
+                return in_array('ROLE_ADMIN', $user->getRoles());
         }
 
         return false;

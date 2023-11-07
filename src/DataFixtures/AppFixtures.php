@@ -9,11 +9,22 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
+
     public function load(ObjectManager $manager): void
     {
+
         $faker = Factory::create();
         $users = [];
         $projects = [];
@@ -51,7 +62,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $user->setMail($faker->email());
             $user->setUsername($faker->userName());
-            $user->setPassword($faker->password());
+            $user->setPassword($this->hasher->hashPassword($user, "123456"));
             $user->setRole("ROLE_USER");
             $manager->persist($user);
             $users[] = $user;
@@ -73,6 +84,8 @@ class AppFixtures extends Fixture
                 $task->setCreateDate($faker->dateTime());
                 $task->setEditDate($faker->dateTime());
                 $task->setProject($projects[$i]);
+                if($j == 0)
+                    $task->addUser($users[$faker->numberBetween(0, count($users) - 1)]);
                 $task->setStatus($statuses[$faker->numberBetween(0, count($statuses) - 1)]);
                 $manager->persist($task);
             }
